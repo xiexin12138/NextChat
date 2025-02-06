@@ -96,7 +96,7 @@ export class DeepSeekApi implements LLMApi {
       presence_penalty: modelConfig.presence_penalty,
       frequency_penalty: modelConfig.frequency_penalty,
       top_p: modelConfig.top_p,
-      max_tokens: modelConfig.model.includes('reason') ? 51200 : Math.max(modelConfig.max_tokens, 1024),
+      max_tokens: 51200 // modelConfig.model.includes('reasoner') ? 51200 : Math.max(modelConfig.max_tokens, 1024),
       // Please do not ask me why not send max_tokens, no reason, this param is just shit, I dont want to explain anymore.
     };
 
