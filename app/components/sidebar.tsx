@@ -269,7 +269,7 @@ export function SideBar(props: { className?: string }) {
             }}
             shadow
           />
-          {mcpEnabled && (
+          {/* {mcpEnabled && (
             <IconButton
               icon={<McpIcon />}
               text={shouldNarrow ? undefined : Locale.Mcp.Name}
@@ -280,6 +280,13 @@ export function SideBar(props: { className?: string }) {
               shadow
             />
           )}
+          <IconButton
+            icon={<DiscoveryIcon />}
+            text={shouldNarrow ? undefined : Locale.Discovery.Name}
+            className={styles["sidebar-bar-button"]}
+            onClick={() => setshowDiscoverySelector(true)}
+            shadow
+          /> */}
         </div>
         {showDiscoverySelector && (
           <Selector
