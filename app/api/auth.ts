@@ -65,7 +65,9 @@ export function auth(req: NextRequest, modelProvider: ModelProvider) {
     //     : serverConfig.apiKey;
 
     let systemApiKey: string | undefined;
-
+    
+    console.log("[Auth] modelProvider", modelProvider);
+    
     switch (modelProvider) {
       case ModelProvider.Stability:
         systemApiKey = serverConfig.stabilityApiKey;
