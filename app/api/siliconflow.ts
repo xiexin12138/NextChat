@@ -34,7 +34,7 @@ export async function handle(
 
   try {
     const response = await request(req);
-    console.error("[SiliconFlow] response", response);
+    console.log("[SiliconFlow] response", response);
     return response;
   } catch (e) {
     console.error("[SiliconFlow] ", e);
@@ -97,10 +97,9 @@ async function request(req: NextRequest) {
         ServiceProvider.SiliconFlow as string,
       );
       console.log("🚀 ~ request ~ notAvailableModel:", notAvailableModel);
+
       // not undefined and is false
       if (notAvailableModel) {
-        console.log();
-
         return NextResponse.json(
           {
             error: true,
