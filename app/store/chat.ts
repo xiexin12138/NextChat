@@ -677,6 +677,7 @@ export const useChatStore = createPersistStore(
               session.mask.modelConfig.model,
               session.mask.modelConfig.providerName,
             );
+        console.log("🚀 ~ model, providerName:", model, providerName);
         const api: ClientApi = getClientApi(providerName as ServiceProvider);
 
         // remove error messages if any

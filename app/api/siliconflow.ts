@@ -18,7 +18,7 @@ export async function handle(
 ) {
   console.log("[SiliconFlow Route] params ", params);
 
-  console.log("[SiliconFlow] req", req)
+  console.log("[SiliconFlow] req", req);
   if (req.method === "OPTIONS") {
     return NextResponse.json({ body: "OK" }, { status: 200 });
   }
@@ -82,8 +82,7 @@ async function request(req: NextRequest) {
     signal: controller.signal,
   };
 
-  console.log('[siliconflow] fetchOptions', fetchOptions);
-  
+  console.log("[siliconflow] fetchOptions", fetchOptions);
 
   // #1815 try to refuse some request to some models
   if (serverConfig.customModels && req.body) {
@@ -92,15 +91,16 @@ async function request(req: NextRequest) {
       fetchOptions.body = clonedBody;
 
       const jsonBody = JSON.parse(clonedBody) as { model?: string };
-
+      const notAvailableModel = isModelNotavailableInServer(
+        serverConfig.customModels,
+        jsonBody?.model as string,
+        ServiceProvider.SiliconFlow as string,
+      );
+      console.log("🚀 ~ request ~ notAvailableModel:", notAvailableModel);
       // not undefined and is false
-      if (
-        isModelNotavailableInServer(
-          serverConfig.customModels,
-          jsonBody?.model as string,
-          ServiceProvider.SiliconFlow as string,
-        )
-      ) {
+      if (notAvailableModel) {
+        console.log();
+
         return NextResponse.json(
           {
             error: true,
@@ -117,14 +117,14 @@ async function request(req: NextRequest) {
   }
   try {
     const res = await fetch(fetchUrl, fetchOptions);
-    console.log("[siliconflow] res:", res)
+    console.log("[siliconflow] res:", res);
 
     // to prevent browser prompt for credentials
     const newHeaders = new Headers(res.headers);
     newHeaders.delete("www-authenticate");
     // to disable nginx buffering
     newHeaders.set("X-Accel-Buffering", "no");
-    
+
     return new Response(res.body, {
       status: res.status,
       statusText: res.statusText,
