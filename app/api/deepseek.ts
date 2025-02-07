@@ -12,6 +12,8 @@ import { isModelNotavailableInServer } from "@/app/utils/model";
 
 const serverConfig = getServerSideConfig();
 
+export const maxDuration = 60; // This function can run for a maximum of 60 seconds
+
 export async function handle(
   req: NextRequest,
   { params }: { params: { path: string[] } },
