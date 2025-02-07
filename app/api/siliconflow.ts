@@ -23,6 +23,7 @@ export async function handle(
   }
 
   const authResult = auth(req, ModelProvider.SiliconFlow);
+  console.log("[SiliconFlow] authResult ", authResult);
   if (authResult.error) {
     return NextResponse.json(authResult, {
       status: 401,
@@ -31,6 +32,7 @@ export async function handle(
 
   try {
     const response = await request(req);
+    console.error("[SiliconFlow] response", response);
     return response;
   } catch (e) {
     console.error("[SiliconFlow] ", e);

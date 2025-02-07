@@ -33,6 +33,7 @@ export async function handle(
 
   try {
     const response = await request(req);
+    console.error("[DeepSeek] response ", response);
     return response;
   } catch (e) {
     console.error("[DeepSeek] ", e);
