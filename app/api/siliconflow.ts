@@ -18,12 +18,14 @@ export async function handle(
 ) {
   console.log("[SiliconFlow Route] params ", params);
 
+  console.log("[SiliconFlow] req", req)
   if (req.method === "OPTIONS") {
     return NextResponse.json({ body: "OK" }, { status: 200 });
   }
 
   const authResult = auth(req, ModelProvider.SiliconFlow);
   console.log("[SiliconFlow] authResult ", authResult);
+
   if (authResult.error) {
     return NextResponse.json(authResult, {
       status: 401,
@@ -80,6 +82,9 @@ async function request(req: NextRequest) {
     signal: controller.signal,
   };
 
+  console.log('[siliconflow] fetchOptions', fetchOptions);
+  
+
   // #1815 try to refuse some request to some models
   if (serverConfig.customModels && req.body) {
     try {
@@ -112,13 +117,14 @@ async function request(req: NextRequest) {
   }
   try {
     const res = await fetch(fetchUrl, fetchOptions);
+    console.log("[siliconflow] res:", res)
 
     // to prevent browser prompt for credentials
     const newHeaders = new Headers(res.headers);
     newHeaders.delete("www-authenticate");
     // to disable nginx buffering
     newHeaders.set("X-Accel-Buffering", "no");
-
+    
     return new Response(res.body, {
       status: res.status,
       statusText: res.statusText,
