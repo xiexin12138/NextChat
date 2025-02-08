@@ -118,7 +118,7 @@ export class SiliconflowApi implements LLMApi {
         headers: getHeaders(),
       };
 
-      // console.log(chatPayload);
+      console.log("[chatPayload]", chatPayload);
 
       // make a fetch request
       const requestTimeoutId = setTimeout(

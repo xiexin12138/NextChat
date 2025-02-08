@@ -116,6 +116,7 @@ async function request(req: NextRequest) {
   }
   try {
     const res = await fetch(fetchUrl, fetchOptions);
+    console.log("🚀 ~ request ~ fetchUrl:", fetchUrl);
     console.log("[siliconflow] res.body:", res.body);
     console.log("[siliconflow] res.headers:", res.headers);
     console.log("[siliconflow] res.status:", res.status);
