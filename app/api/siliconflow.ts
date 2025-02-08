@@ -129,6 +129,8 @@ async function request(req: NextRequest) {
       statusText: res.statusText,
       headers: newHeaders,
     });
+  } catch (error) {
+    console.error("[SiliconFlow] request error", error);
   } finally {
     clearTimeout(timeoutId);
   }
