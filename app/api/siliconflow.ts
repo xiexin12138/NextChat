@@ -117,8 +117,29 @@ async function request(req: NextRequest) {
   try {
     const res = await fetch(fetchUrl, fetchOptions);
     console.log("🚀 ~ request ~ fetchUrl:", fetchUrl);
-    console.log("[siliconflow] res.body:", res.body);
     console.log("[siliconflow] res.headers:", res.headers);
+    console.log("[siliconflow] res.status:", res.status);
+
+    // 克隆响应流
+    const resClone = res.clone();
+
+    try {
+      // 尝试解析为 JSON
+      const jsonBody = await resClone.json();
+      console.log(
+        "[siliconflow] res.body (JSON):",
+        JSON.stringify(jsonBody, null, 2),
+      );
+    } catch (e) {
+      // 如果不是 JSON，则读取为文本
+      const textBody = await resClone.text();
+      console.log("[siliconflow] res.body (Text):", textBody);
+    }
+
+    console.log(
+      "[siliconflow] res.headers:",
+      Object.fromEntries(res.headers.entries()),
+    );
     console.log("[siliconflow] res.status:", res.status);
 
     // to prevent browser prompt for credentials
