@@ -111,6 +111,7 @@ export class SiliconflowApi implements LLMApi {
 
     try {
       const chatPath = this.path(SiliconFlow.ChatPath);
+      console.log("🚀 ~ SiliconflowApi ~ chat ~ chatPath:", chatPath);
       const chatPayload = {
         method: "POST",
         body: JSON.stringify(requestPayload),

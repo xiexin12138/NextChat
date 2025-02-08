@@ -34,7 +34,7 @@ export async function handle(
 
   try {
     const response = await request(req);
-    console.log("[SiliconFlow] response", prettyObject(response));
+    console.log("[SiliconFlow] response", JSON.stringify(response));
     return response;
   } catch (e) {
     console.error("[SiliconFlow] error", e);
