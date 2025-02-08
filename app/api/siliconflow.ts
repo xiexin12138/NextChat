@@ -89,6 +89,7 @@ async function request(req: NextRequest) {
     try {
       const clonedBody = await req.text();
       fetchOptions.body = clonedBody;
+      console.log("🚀 ~ request ~ fetchOptions.body:", fetchOptions.body);
 
       const jsonBody = JSON.parse(clonedBody) as { model?: string };
       const notAvailableModel = isModelNotavailableInServer(
