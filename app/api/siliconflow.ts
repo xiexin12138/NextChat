@@ -34,10 +34,10 @@ export async function handle(
 
   try {
     const response = await request(req);
-    console.log("[SiliconFlow] response", response);
+    console.log("[SiliconFlow] response", prettyObject(response));
     return response;
   } catch (e) {
-    console.error("[SiliconFlow] ", e);
+    console.error("[SiliconFlow] error", e);
     return NextResponse.json(prettyObject(e));
   }
 }
@@ -116,7 +116,9 @@ async function request(req: NextRequest) {
   }
   try {
     const res = await fetch(fetchUrl, fetchOptions);
-    console.log("[siliconflow] res:", res);
+    console.log("[siliconflow] res.body:", res.body);
+    console.log("[siliconflow] res.headers:", res.headers);
+    console.log("[siliconflow] res.status:", res.status);
 
     // to prevent browser prompt for credentials
     const newHeaders = new Headers(res.headers);
